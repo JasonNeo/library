@@ -16,7 +16,7 @@ $(document).ready(function(){
 		
 		rules:{
 			fname :{ required : true },
-			email : { required : true, email : true, remote : { url : baseURL + "checkEmailExists", type :"post"} },
+			email : { required : true, email : true, remote : { url : baseURL + "admin/checkEmailExists", type :"post"} },
 			password : { required : true },
 			cpassword : {required : true, equalTo: "#password"},
 			mobile : { required : true, digits : true },

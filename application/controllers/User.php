@@ -28,7 +28,7 @@ class User extends BaseController
     {
         $this->global['pageTitle'] = 'CodeInsect : Dashboard';
         
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
+        $this->loadViews("back/user/dashboard", $this->global, NULL , NULL);
     }
     
     /**
@@ -55,7 +55,7 @@ class User extends BaseController
             
             $this->global['pageTitle'] = 'CodeInsect : User Listing';
             
-            $this->loadViews("users", $this->global, $data, NULL);
+            $this->loadViews("back/user/users", $this->global, $data, NULL);
         }
     }
 
@@ -75,7 +75,7 @@ class User extends BaseController
             
             $this->global['pageTitle'] = 'CodeInsect : Add New User';
 
-            $this->loadViews("addNew", $this->global, $data, NULL);
+            $this->loadViews("back/user/addNew", $this->global, $data, NULL);
         }
     }
 
@@ -164,7 +164,7 @@ class User extends BaseController
         {
             if($userId == null)
             {
-                redirect('userListing');
+                redirect('admin/userListing');
             }
             
             $data['roles'] = $this->user_model->getUserRoles();
@@ -172,7 +172,7 @@ class User extends BaseController
             
             $this->global['pageTitle'] = 'CodeInsect : Edit User';
             
-            $this->loadViews("editOld", $this->global, $data, NULL);
+            $this->loadViews("back/user/editOld", $this->global, $data, NULL);
         }
     }
     
@@ -236,7 +236,7 @@ class User extends BaseController
                     $this->session->set_flashdata('error', 'User updation failed');
                 }
                 
-                redirect('userListing');
+                redirect('admin/userListing');
             }
         }
     }
@@ -308,7 +308,7 @@ class User extends BaseController
             
             $this->global['pageTitle'] = 'CodeInsect : User Login History';
             
-            $this->loadViews("loginHistory", $this->global, $data, NULL);
+            $this->loadViews("back/user/loginHistory", $this->global, $data, NULL);
         }        
     }
 
@@ -321,7 +321,7 @@ class User extends BaseController
         $data["active"] = $active;
         
         $this->global['pageTitle'] = $active == "details" ? 'CodeInsect : My Profile' : 'CodeInsect : Change Password';
-        $this->loadViews("profile", $this->global, $data, NULL);
+        $this->loadViews("back/user/profile", $this->global, $data, NULL);
     }
 
     /**
@@ -360,7 +360,7 @@ class User extends BaseController
                 $this->session->set_flashdata('error', 'Profile updation failed');
             }
 
-            redirect('profile/'.$active);
+            redirect('admin/profile/'.$active);
         }
     }
 
@@ -390,7 +390,7 @@ class User extends BaseController
             if(empty($resultPas))
             {
                 $this->session->set_flashdata('nomatch', 'Your old password is not correct');
-                redirect('profile/'.$active);
+                redirect('admin/profile/'.$active);
             }
             else
             {
@@ -402,7 +402,7 @@ class User extends BaseController
                 if($result > 0) { $this->session->set_flashdata('success', 'Password updation successful'); }
                 else { $this->session->set_flashdata('error', 'Password updation failed'); }
                 
-                redirect('profile/'.$active);
+                redirect('admin/profile/'.$active);
             }
         }
     }
@@ -429,6 +429,19 @@ class User extends BaseController
         }
 
         return $return;
+    }
+
+    public function book($para1 = "")
+    {
+        if ($para1 == 'add') {
+
+        }
+        if ($para1 == 'edit') {
+
+        }
+        if ($para1 == 'delete') {
+
+        }
     }
 }
 

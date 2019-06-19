@@ -1,0 +1,192 @@
+.catalogue-container{
+	background-color: #fafafa;
+	transition: .3s;
+    padding: 200px 0 100px 0;
+}
+
+.catalogue-container span{
+	font-size: 15px;
+	margin-top: 10px;
+	color: #333;
+	font-weight: bold;
+
+}
+
+.catalogue-container .img-fluid{
+	width: 64px;
+	height: 64px;
+}
+
+.catalogue-container .search_container img{
+	width: 64px; height: 64px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+} 
+.catalogue-container .search_container div{
+	width: 100%;
+	border: 1px solid #a9a9a9;
+	border-radius: 30px;
+} 
+.catalogue-container .search_container input{
+	width: 95%;
+	border: none;
+	display: block;
+	margin-left: 4px;
+} 
+:not(:last-child).search_container{
+	border-right: none;
+} 
+.catalogue-container .search_container button{
+	background-color: #fff;
+	border: none;cursor: pointer;
+} 
+.catalogue-container .search_container button:hover{
+	background-color: #fff;
+	border: none;
+} 
+.catalogue-container .search_container img{
+	width: 25px;
+	height: 25px;
+}
+
+.catalogue-container .search-box {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #253640;
+	background-position: center;
+	height: 40px;
+	border-radius: 40px;
+	padding: 0px;
+	margin-bottom: 50px;
+}
+
+.catalogue.blur .catalogue-container .search-box {
+	filter: blur(0);
+}
+
+.catalogue-container .search-box:hover > .search-text {
+	width: 400px;
+	padding: 0px 0px 0px 15px;
+}
+
+.catalogue-container .search-box:hover > .search-button {
+	background: #253640;
+}
+
+.catalogue-container .search-button {
+	color: #3399ff;
+	float: right;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #2f3640;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.4s;
+	padding: 0px;
+	
+}
+
+.catalogue-container .search-text {
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	padding: 0 0 0 15px;
+	color: white;
+	font-size: 16px;
+	transition: 0.4s;
+	line-height: 40px;
+	width: 300px;
+}
+
+.catalogue-row{
+	transition: .2s;
+}
+
+.catalogue-row.blur {
+	filter: blur(2px);
+}
+
+.catalogue-icon-container:hover .catalogue-icon {
+	transform: scale(1.1);
+	transition-duration: 0.1s;
+}
+
+.catalogue-icon-container button {
+	display: inline-block;
+  	position: relative;
+  	background: none;
+ 	border: none;
+ 	color: none;
+ 	cursor: pointer;
+	margin-top: 10px;
+	padding: 5px 10px;
+
+}
+
+.catalogue-icon-container button::before, button::after{
+  content:"";
+  width: 0;
+  height: 3px;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #3399ff;
+}
+
+.catalogue-icon-container span::before, span::after{
+  content:"";
+  width: 3px;
+  height:0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #3399ff;
+}
+
+.catalogue-icon-container:hover button::before, 
+.catalogue-icon-container:hover button::after{
+  width: 100%;
+}
+
+.catalogue-icon-container:hover .button-effects span::before, 
+.catalogue-icon-container:hover .button-effects span::after{
+  height: 100%;
+}
+
+.catalogue-icon-container .button-effects::after{
+  left: 0;
+  bottom: 0;
+  transition-delay: 0.3s;
+}
+.catalogue-icon-container .button-effects span::after{
+  transition-delay: 0.2s;
+  right: 0;
+  bottom: 0
+}
+.catalogue-icon-container .button-effects::before{
+  right: 0;
+  top: 0;
+  transition-delay: 0.1s;
+}
+.catalogue-icon-container .button-effects span::before{
+  transition-delay: 0s;
+  left: 0;
+  top: 0;
+}
+
+.catalogue-icon-container .button-effects:hover::after{
+  transition-delay: 0s;
+}
+.catalogue-icon-container .button-effects:hover span::after{
+  transition-delay: 0.1s;
+}
+.catalogue-icon-container .button-effects:hover::before{
+  transition-delay: 0.2s;
+}
+.catalogue-icon-container .button-effects:hover span::before{
+  transition-delay: 0.3s;
+}

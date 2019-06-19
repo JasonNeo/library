@@ -35,11 +35,12 @@ class Login extends CI_Controller
         
         if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
         {
-            $this->load->view('login');
+            // $this->load->view('back/login');
+            $this->load->view('back/login/login');
         }
         else
         {
-            redirect('/dashboard');
+            redirect('admin/dashboard');
         }
     }
     
@@ -85,7 +86,7 @@ class Login extends CI_Controller
 
                 $this->login_model->lastLogin($loginInfo);
                 
-                redirect('/dashboard');
+                redirect('admin/dashboard');
             }
             else
             {
@@ -105,11 +106,12 @@ class Login extends CI_Controller
         
         if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
         {
-            $this->load->view('forgotPassword');
+            // $this->load->view('forgotPassword');
+            $this->load->view('back/login/forgotPassword');
         }
         else
         {
-            redirect('/dashboard');
+            redirect('admin/dashboard');
         }
     }
     
@@ -199,7 +201,8 @@ class Login extends CI_Controller
         
         if ($is_correct == 1)
         {
-            $this->load->view('newPassword', $data);
+            // $this->load->view('newPassword', $data);
+            $this->load->view('back/login/newPassword', $data);
         }
         else
         {

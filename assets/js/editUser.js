@@ -13,7 +13,7 @@ $(document).ready(function(){
 		
 		rules:{
 			fname :{ required : true },
-			email : { required : true, email : true, remote : { url : baseURL + "checkEmailExists", type :"post", data : { userId : function(){ return $("#userId").val(); } } } },
+			email : { required : true, email : true, remote : { url : baseURL + "admin/checkEmailExists", type :"post", data : { userId : function(){ return $("#userId").val(); } } } },
 			cpassword : {equalTo: "#password"},
 			mobile : { required : true, digits : true },
 			role : { required : true, selected : true}
@@ -34,7 +34,7 @@ $(document).ready(function(){
 		rules:{
 			fname :{ required : true },
 			mobile : { required : true, digits : true },
-			email : { required : true, email : true, remote : { url : baseURL + "checkEmailExists", type :"post", data : { userId : function(){ return $("#userId").val(); } } } },
+			email : { required : true, email : true, remote : { url : baseURL + "admin/checkEmailExists", type :"post", data : { userId : function(){ return $("#userId").val(); } } } },
 		},
 		messages:{
 			fname :{ required : "This field is required" },

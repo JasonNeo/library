@@ -1,0 +1,120 @@
+/*general*/
+body{
+	color: #333;
+}
+
+.home_search_form div{
+	width: 100%;
+	border: 1px solid #a9a9a9;
+	border-radius: 3ch;
+	padding-right: 15px;
+}
+.home_search_form input{
+	width: 95%;
+	border: none;
+	display: block;
+	margin-left: 4px;
+}
+:not(:last-child).home_search_input{
+	border-right: none;
+}
+.home_search_form button{
+	border: none;
+	cursor: pointer;
+	background: none;
+}
+.home_search_form img{
+	width: 25px;
+	 height: 25px;
+}
+
+/*RESULT PAGE*/
+.result-container{
+	margin-top: 180px;
+}
+.result-container .badge{
+	font-size: 16px;
+}
+.result-container .badge-primary{
+	background-color: #14bdee;
+}
+
+#result-content .card .card-title-container{
+	position: relative;
+	transition-duration: 0.5s;
+}
+#result-content .card .card-header:after{
+	position: absolute;
+	width: 0;
+	height:3px;
+	content: '';
+	background-color: #14bdee;
+	top: 20px;
+	left: 15px;
+	margin-right: 100%;
+	transition-duration: 0.5s;
+}
+#result-content .card .card-header:hover .card-title-container{
+	transform: translateX(50px);
+}
+#result-content .card .card-header:hover:after{
+	width: 35px;
+	margin-right: 0;
+}
+
+.card .btn-link, .card .checkbox > label{
+	cursor: pointer;
+}
+
+.card .checkbox label:after, 
+.card .radio label:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.card .checkbox .cr,
+.card .radio .cr {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #a9a9a9;
+	border-radius: .25em;
+	width: 1.3em;
+	height: 1.3em;
+	float: left;
+	margin-right: .5em;
+}
+.card .radio .cr {
+	border-radius: 50%;
+}
+.card .checkbox .cr .cr-icon,
+.card .radio .cr .cr-icon {
+	position: absolute;
+	font-size: .8em;
+	line-height: 0;
+	top: 50%;
+	left: 20%;
+}
+.card .radio .cr .cr-icon {
+	margin-left: 0.04em;
+}
+
+.card .checkbox label input[type="checkbox"],
+.card .radio label input[type="radio"] {
+	display: none;
+}
+.card .checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.card .radio label input[type="radio"] + .cr > .cr-icon {
+	transform: scale(3) rotateZ(-20deg);
+	opacity: 0;
+	transition: all .3s ease-in;
+}
+.card .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.card .radio label input[type="radio"]:checked + .cr > .cr-icon {
+	transform: scale(1) rotateZ(0deg);
+	opacity: 1;
+}
+.card .checkbox label input[type="checkbox"]:disabled + .cr,
+.card .radio label input[type="radio"]:disabled + .cr {
+	opacity: .5;
+}
