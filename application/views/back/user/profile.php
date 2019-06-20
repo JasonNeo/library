@@ -52,7 +52,7 @@ $role = $userInfo->role;
                     </ul>
                     <div class="tab-content">
                         <div class="<?= ($active == "details")? "active" : "" ?> tab-pane" id="details">
-                            <form action="<?php echo base_url() ?>admin/profileUpdate" method="post" id="editProfile" role="form">
+                            <form action="<?php echo base_url() ?>user/profileUpdate" method="post" id="editProfile" role="form">
                                 <?php $this->load->helper('form'); ?>
                                 <div class="box-body">
                                     <div class="row">

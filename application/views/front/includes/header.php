@@ -60,7 +60,31 @@
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
 									<li><a href="<?= base_url(); ?>about">About us</a></li>
-									<li><a href="<?= base_url(); ?>login">Login</a></li>
+									<?php
+										$isLoggedIn = $this->session->userdata('isLoggedIn');
+										if (!$isLoggedIn):
+									?>
+									<li>
+										<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalCenter" data-type="loginMe">Login</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter" data-type="register">Register</button>
+									</li>
+									<?php
+										// logged in
+										else:
+									?>
+									<li>
+										<form action="<?= base_url(); ?>user/dashboard" method="post">
+											<button type="submit" class="btn btn-outline-primary" id="account_btn">Account</button>
+										</form>
+									</li>
+									<li>
+										<form action="<?= base_url(); ?>user/logout" method="post">
+											<button type="submit" class="btn btn-outline-primary" id="logout_btn">Log Out</button>
+										</form>
+									</li>
+									<?php
+										endif;
+									?>
 								</ul>
 
 								<!-- Hamburger -->
@@ -94,3 +118,45 @@
 			</ul>
 		</nav>
 	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+	  <form action="" method="post" id="my_form">
+		<div class="modal-body">
+			<label>Email: <input type="text" name="email"></label>
+			<br>
+			<label>Password: <input type="password" name="password"></label>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			<button type="submit" class="btn btn-primary" id="submit_btn"></button>
+		</div>
+	  </form>
+    </div>
+  </div>
+</div>
+
+<script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+// document ready
+$(document).ready(function() {
+	$('#modalCenter').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget); // Button that triggered the modal
+		var type = button.data('type');
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		var modal = $(this);
+		modal.find('#modal_title').text(type);
+		modal.find('#submit_btn').text(type);
+		$('#my_form').attr('action', '<?= base_url(); ?>login/' + type);
+	});
+});
+</script>

@@ -40,7 +40,7 @@
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="<?php echo base_url(); ?>admin/dashboard" class="logo">
+        <a href="<?php echo base_url(); ?>user/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>CI</b>AS</span>
           <!-- logo for regular state and mobile devices -->
@@ -82,10 +82,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo base_url(); ?>admin/profile" class="btn btn-warning btn-flat"><i class="fa fa-user-circle"></i> Profile</a>
+                      <a href="<?php echo base_url(); ?>user/profile" class="btn btn-warning btn-flat"><i class="fa fa-user-circle"></i> Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>admin/logout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
+                      <a href="<?php echo base_url(); ?>user/logout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -102,7 +102,7 @@
           <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>user/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>
@@ -173,7 +173,7 @@
             {
             ?>
             <li>
-              <a href="<?php echo base_url(); ?>admin/userListing">
+              <a href="<?php echo base_url(); ?>user/userListing">
                 <i class="fa fa-users"></i>
                 <span>Users</span>
               </a>

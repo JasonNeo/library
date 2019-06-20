@@ -23,7 +23,6 @@
 </div> <!-- super-container -->
 
     <!-- <script src="<?php echo base_url(); ?>js/jquery-3.2.1.min.js"></script> -->
-    <script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/parallax-js-master/parallax.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/scrollmagic/ScrollMagic.min.js"></script>

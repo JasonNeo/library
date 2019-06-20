@@ -40,7 +40,7 @@ class Login extends CI_Controller
         }
         else
         {
-            redirect('admin/dashboard');
+            redirect('user/dashboard');
         }
     }
     
@@ -48,7 +48,7 @@ class Login extends CI_Controller
     /**
      * This function used to logged in user
      */
-    public function loginMe()
+    public function loginMe($isAdminLogin = false)
     {
         $this->load->library('form_validation');
         
@@ -86,7 +86,11 @@ class Login extends CI_Controller
 
                 $this->login_model->lastLogin($loginInfo);
                 
-                redirect('admin/dashboard');
+                if ($isAdminLogin) {
+                    redirect('user/dashboard');
+                } else {
+                    redirect('home');                    
+                }
             }
             else
             {
@@ -94,6 +98,24 @@ class Login extends CI_Controller
                 
                 $this->index();
             }
+        }
+    }
+
+    /**
+     * This function used to logged in user
+     */
+    public function viewAccount()
+    {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+
+        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
+        {
+            // prompt login
+            $this->index();
+        }
+        else
+        {
+            redirect('user/dashboard');
         }
     }
 
@@ -111,7 +133,7 @@ class Login extends CI_Controller
         }
         else
         {
-            redirect('admin/dashboard');
+            redirect('user/dashboard');
         }
     }
     
@@ -149,7 +171,7 @@ class Login extends CI_Controller
                 
                 if($save)
                 {
-                    $data1['reset_link'] = base_url() . "resetPasswordConfirmUser/" . $data['activation_id'] . "/" . $encoded_email;
+                    $data1['reset_link'] = base_url() . "login/resetPasswordConfirmUser/" . $data['activation_id'] . "/" . $encoded_email;
                     $userInfo = $this->login_model->getCustomerInfoByEmail($email);
 
                     if(!empty($userInfo)){
@@ -179,7 +201,7 @@ class Login extends CI_Controller
                 $status = 'invalid';
                 setFlashData($status, "This email is not registered with us.");
             }
-            redirect('/forgotPassword');
+            redirect('login/forgotPassword');
         }
     }
 

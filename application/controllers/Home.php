@@ -8,6 +8,13 @@ require APPPATH . '/libraries/BaseController.php';
  */
 class Home extends BaseController {
 
+	function __construct()
+	{
+		parent::__construct();
+        $this->load->database();
+        $this->load->library('session');
+	}
+
 	public function index()
 	{
 		// $this->loadViewsHome("about", $this->global, NULL, NULL);
@@ -19,53 +26,56 @@ class Home extends BaseController {
 		$page_data['page_name'] = "about";
     	$this->load->view('front/index', $page_data);
 	}
-	public function catalogue()
-	{
-		$page_data['page_name'] = "catalogue";
-    	$this->load->view('front/index', $page_data);
-	}
 	public function harvard()
 	{
 		$page_data['page_name'] = "harvard";
     	$this->load->view('front/index', $page_data);
 	}
-	public function result()
-	{
-		$page_data['page_name'] = "result";
-    	$this->load->view('front/index', $page_data);
-	}
 
-	function book_search($param = '', $bookID)
+	function book_search($param = '')
     {
-		$this->db->select('*')->from('books');
-		$this->db->where('book_id', $bookID);
-
-
-        $category = $this->input->post('category');
-		$this->session->set_userdata('searched_cat', $category);
+        // $category = $this->input->post('category');
+		// $this->session->set_userdata('searched_cat', $category);
 		
-		if ($this->input->post('filter'))
-			$filter = $this->input->post('filter');
+		if ($this->input->post('query')) {
+			$query = $this->input->post('query');
+			$this->db->like('title', $query);
+		}
 
-        if ($param !== 'top') {
-            $subject = $this->input->post('subject');
-            $range        = $this->input->post('price');
-        	$brand 		  = $this->input->post('brand');
-        	$query 		  = $this->input->post('query');
-            $p            = explode(';', $range);
-            $this->session->set_flashdata('query',$query);
-            redirect(base_url() . 'index.php/front/category/' . $category . '/' . $sub_category . '-'.$brand.'/' . $p[0] . '/' . $p[1] . '/' . $query, 'refresh');
-        } else if ($param == 'top') {
-            redirect(base_url() . 'index.php/front/category/' . $category, 'refresh');
-        }
+		$page_data['books'] = $this->db->get('tbl_books')->result_array();
+		
+		$this->session->set_flashdata('page_data', $page_data);
+		redirect(base_url() . 'book/search', 'refresh');
 	}
 	
-	function book_view($bookID)
+	function book($type = 'all', $bookId = '')
 	{
-		$page_data['page_name'] = "about";
+		if ($type == 'detail') {
+			$page_data['page_name'] = "book_detail";
+			$this->db->where('bookId', $bookId);
+			// return only one record in array form
+			$page_data['book'] = $this->db->get('tbl_books')->row_array();
+		}
 
-		$this->db->where('book_id', $bookID);
-		$page_data['all_books'] = $this->db->get('books')->result_array();
-		$this->load->view('back/admin/blog_list', $page_data);
+		if ($type == 'search') {
+			$page_data['page_name'] = "book_catalogue";
+			if ($this->input->post('query')) {
+				$query = $this->input->post('query');
+				$this->db->like('title', $query);
+			}
+	
+			$page_data['books'] = $this->db->get('tbl_books')->result_array();
+			// $page_data['books'] = $this->session->flashdata();
+		}
+		
+		if ($type == 'all') {
+			$page_data['page_name'] = "book_catalogue";
+			$page_data['books'] = $this->db->get('tbl_books')->result_array();	
+		}
+
+		if ($type == 'borrow') {
+			
+		}
+		$this->load->view('front/index', $page_data);
 	}
 }

@@ -9,7 +9,7 @@
     </section>
     <section class="content">
         <div class="row">
-          <form action="<?php echo base_url() ?>admin/login-history" method="POST" id="searchList">
+          <form action="<?php echo base_url() ?>user/login-history" method="POST" id="searchList">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 form-group">
               <div class="input-group">
                 <input id="fromDate" type="text" name="fromDate" value="<?php echo $fromDate; ?>" class="form-control datepicker" placeholder="From Date" autocomplete="off" />

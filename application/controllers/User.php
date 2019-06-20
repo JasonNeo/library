@@ -8,6 +8,22 @@ require APPPATH . '/libraries/BaseController.php';
  * @author : Kishor Mali
  * @version : 1.1
  * @since : 15 November 2016
+ * 
+ * List of functions:
+ * userListing()
+ * addNew()
+ * checkEmailExists()
+ * addNewUser()
+ * editOld()
+ * editUser()
+ * deleteUser()
+ * pageNotFound()
+ * loginHistoy()
+ * profile()
+ * profileUpdate()
+ * changePassword()
+ * emailExists()
+ * book()
  */
 class User extends BaseController
 {
@@ -18,7 +34,7 @@ class User extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
-        $this->isLoggedIn();   
+        $this->isLoggedIn();
     }
     
     /**
@@ -144,7 +160,7 @@ class User extends BaseController
                     $this->session->set_flashdata('error', 'User creation failed');
                 }
                 
-                redirect('addNew');
+                redirect('user/addNew');
             }
         }
     }
@@ -164,7 +180,7 @@ class User extends BaseController
         {
             if($userId == null)
             {
-                redirect('admin/userListing');
+                redirect('user/userListing');
             }
             
             $data['roles'] = $this->user_model->getUserRoles();
@@ -236,7 +252,7 @@ class User extends BaseController
                     $this->session->set_flashdata('error', 'User updation failed');
                 }
                 
-                redirect('admin/userListing');
+                redirect('user/userListing');
             }
         }
     }
@@ -360,7 +376,7 @@ class User extends BaseController
                 $this->session->set_flashdata('error', 'Profile updation failed');
             }
 
-            redirect('admin/profile/'.$active);
+            redirect('user/profile/'.$active);
         }
     }
 
@@ -390,7 +406,7 @@ class User extends BaseController
             if(empty($resultPas))
             {
                 $this->session->set_flashdata('nomatch', 'Your old password is not correct');
-                redirect('admin/profile/'.$active);
+                redirect('user/profile/'.$active);
             }
             else
             {
@@ -402,7 +418,7 @@ class User extends BaseController
                 if($result > 0) { $this->session->set_flashdata('success', 'Password updation successful'); }
                 else { $this->session->set_flashdata('error', 'Password updation failed'); }
                 
-                redirect('admin/profile/'.$active);
+                redirect('user/profile/'.$active);
             }
         }
     }

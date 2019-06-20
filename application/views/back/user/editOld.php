@@ -30,7 +30,7 @@ $roleId = $userInfo->roleId;
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     
-                    <form role="form" action="<?php echo base_url() ?>admin/editUser" method="post" id="editUser" role="form">
+                    <form role="form" action="<?php echo base_url() ?>user/editUser" method="post" id="editUser" role="form">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">                                

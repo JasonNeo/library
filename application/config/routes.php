@@ -64,37 +64,45 @@ $route['catalogue'] = 'home/catalogue';
 $route['harvard'] = 'home/harvard';
 $route['result'] = 'home/result';
 
-$route['admin/loginMe'] = 'login/loginMe';
-$route['admin/dashboard'] = 'user';
-$route['admin/logout'] = 'user/logout';
-$route['admin/userListing'] = 'user/userListing';
-$route['admin/userListing/(:num)'] = "user/userListing/$1";
-$route['admin/addNew'] = "user/addNew";
-$route['admin/addNewUser'] = "user/addNewUser";
-$route['admin/editOld'] = "user/editOld";
-$route['admin/editOld/(:num)'] = "user/editOld/$1";
-$route['admin/editUser'] = "user/editUser";
-$route['admin/deleteUser'] = "user/deleteUser";
-$route['admin/profile'] = "user/profile";
-$route['admin/profile/(:any)'] = "user/profile/$1";
-$route['admin/profileUpdate'] = "user/profileUpdate";
-$route['admin/profileUpdate/(:any)'] = "user/profileUpdate/$1";
+$route['book'] = "home/book";
+$route['book/(.*)'] = "home/book/$1";
+$route['register'] = "login/createPasswordUser";
 
-$route['admin/loadChangePass'] = "user/loadChangePass";
-$route['admin/changePassword'] = "user/changePassword";
-$route['admin/changePassword/(:any)'] = "user/changePassword/$1";
-$route['admin/pageNotFound'] = "user/pageNotFound";
-$route['admin/checkEmailExists'] = "user/checkEmailExists";
-$route['admin/login-history'] = "user/loginHistoy";
-$route['admin/login-history/(:num)'] = "user/loginHistoy/$1";
-$route['admin/login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
+// frontend & backend
+// $route['user/logout'] = 'user/logout';
+$route['login/createPasswordUser'] = "login/createPasswordUser";
 
-$route['admin/forgotPassword'] = "login/forgotPassword";
-$route['admin/resetPasswordUser'] = "login/resetPasswordUser";
-$route['admin/resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
-$route['admin/resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
-$route['admin/resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
-$route['admin/createPasswordUser'] = "login/createPasswordUser";
+// frontend
+$route['login/loginMe'] = 'login/loginMe';
+
+// backend
+$route['user/dashboard'] = 'user';
+$route['user/userListing'] = 'user/userListing';
+$route['user/userListing/(:num)'] = "user/userListing/$1";
+$route['user/addNew'] = "user/addNew";
+$route['user/addNewUser'] = "user/addNewUser";
+$route['user/editOld'] = "user/editOld";
+$route['user/editOld/(:num)'] = "user/editOld/$1";
+$route['user/editUser'] = "user/editUser";
+$route['user/deleteUser'] = "user/deleteUser";
+$route['user/profile'] = "user/profile";
+$route['user/profile/(:any)'] = "user/profile/$1";
+$route['user/profileUpdate'] = "user/profileUpdate";
+$route['user/profileUpdate/(:any)'] = "user/profileUpdate/$1";
+$route['user/loadChangePass'] = "user/loadChangePass";
+$route['user/changePassword'] = "user/changePassword";
+$route['user/changePassword/(:any)'] = "user/changePassword/$1";
+$route['user/pageNotFound'] = "user/pageNotFound";
+$route['user/checkEmailExists'] = "user/checkEmailExists";
+$route['user/login-history'] = "user/loginHistoy";
+$route['user/login-history/(:num)'] = "user/loginHistoy/$1";
+$route['user/login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
+
+$route['login/forgotPassword'] = "login/forgotPassword";
+$route['login/resetPasswordUser'] = "login/resetPasswordUser";
+$route['login/resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
+$route['login/resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
+$route['login/resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="home_slider_form_container mt-4">
-							<form action="" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+							<form method="post" action="<?= base_url() ?>home/book/search" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
 								<div class="d-flex flex-row align-items-center justify-content-start">
 									<div class="dropdown">
 										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
 											<a class="dropdown-item" href="#">Something else here</a>
 										</div>
 									</div>
-									<input type="search" class="home_search_input" placeholder="Search Catalogue" required="required">
+									<input type="search" name="query" class="home_search_input" placeholder="Search Catalogue" required="required">
 									<button type="submit"><img src="<?= base_url(); ?>assets/images/icons/bold_search_64.png"></button>
 								</div>
 							</form>
