@@ -262,7 +262,7 @@ section
 }
 .header.scrolled
 {
-	top: -40px;
+	/* top: -40px; */
 }
 
 /*********************************
@@ -345,7 +345,7 @@ section
 }
 .header_content
 {
-	height: 90px;
+	/* height: 90px; */
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
@@ -354,7 +354,7 @@ section
 }
 .header.scrolled .header_content
 {
-	height: 80px;
+	/* height: 80px; */
 }
 
 /*********************************

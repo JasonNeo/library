@@ -40,11 +40,11 @@
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="<?php echo base_url(); ?>user/dashboard" class="logo">
+        <a href="<?php echo base_url(); ?>user/profile" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>CI</b>AS</span>
+          <span class="logo-mini"><b>LB</b>BD</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>CodeInsect</b>AS</span>
+          <span class="logo-lg"><b>Library</b>Backend</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -81,9 +81,9 @@
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!-- <div class="pull-left">
                       <a href="<?php echo base_url(); ?>user/profile" class="btn btn-warning btn-flat"><i class="fa fa-user-circle"></i> Profile</a>
-                    </div>
+                    </div> -->
                     <div class="pull-right">
                       <a href="<?php echo base_url(); ?>user/logout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
                     </div>
@@ -101,15 +101,15 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li>
+            <!-- <li>
               <a href="<?php echo base_url(); ?>user/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
-            </li>
+            </li> -->
             <li>
-              <a href="#" >
-                <i class="fa fa-plane"></i>
-                <span>New Task</span>
+              <a href="<?= base_url(); ?>user/bookListing" >
+                <i class="fa fa-book"></i>
+                <span>Book</span>
               </a>
             </li>
             <li>

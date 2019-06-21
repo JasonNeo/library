@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/BaseController.php';
 
 /**
- * Home page
+ * Home controller
+ * To control all visitors (non-members) operations.
  */
 class Home extends BaseController {
 
@@ -73,9 +74,6 @@ class Home extends BaseController {
 			$page_data['books'] = $this->db->get('tbl_books')->result_array();	
 		}
 
-		if ($type == 'borrow') {
-			
-		}
 		$this->load->view('front/index', $page_data);
 	}
 }

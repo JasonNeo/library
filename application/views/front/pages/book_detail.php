@@ -1,4 +1,10 @@
 <div class="container mt-5">
+    <?php if($this->session->flashdata('msg')): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $this->session->flashdata('msg'); ?>
+        </div>
+    <?php endif; ?>
+    
     <div class="row">
         <div class="col">
             <dl>
@@ -12,15 +18,30 @@
                         <dd><?= $book['subject'] ?></dd>
                         <dt>Description</dt>
                         <dd><?= $book['description'] ?></dd>
-                        <dt>Available</dt>
-                        <dd><?= $book['availability'] ?></dd>
                     </div>
                     <div class="col">
                     </div>
                 </div>
-                <form action="<?= base_url(); ?>book/borrow/<?= $book['bookId'] ?>" method="post">
-                    <button type="submit" class="btn btn-default">Borrow</button>
-                </form>
+                <?php
+                    if ($book['availability'] == 1):
+                        $isLoggedIn = $this->session->userdata('isLoggedIn');
+                        if (!$isLoggedIn):
+                ?>
+                            <p>You must be logged in to place a hold on this.</p>
+                <?php
+                        else:
+                ?>
+                            <form action="<?= base_url(); ?>user/book/borrow/<?= $book['bookId'] ?>" method="post">
+                                <button type="submit" class="btn btn-default">Borrow</button>
+                            </form>
+                <?php
+                        endif;
+                    else:
+                ?>
+                    <p>Book is currently unavailable.</p>
+                <?php
+                    endif;
+                ?>
             </dl>
         </div>
     </div>

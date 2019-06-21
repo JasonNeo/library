@@ -3,9 +3,6 @@
 /**
  * Class : Login (LoginController)
  * Login class to control to authenticate user credentials and starts user's session.
- * @author : Kishor Mali
- * @version : 1.1
- * @since : 15 November 2016
  */
 class Login extends CI_Controller
 {
@@ -40,7 +37,7 @@ class Login extends CI_Controller
         }
         else
         {
-            redirect('user/dashboard');
+            redirect('user/profile');
         }
     }
     
@@ -48,7 +45,7 @@ class Login extends CI_Controller
     /**
      * This function used to logged in user
      */
-    public function loginMe($isAdminLogin = false)
+    public function loginMe($isAdminLogin = false, $prevURL = '')
     {
         $this->load->library('form_validation');
         
@@ -79,6 +76,7 @@ class Login extends CI_Controller
                                 );
 
                 $this->session->set_userdata($sessionArray);
+                $this->session->set_userdata('userId', $result->userId);
 
                 unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
 
@@ -86,16 +84,20 @@ class Login extends CI_Controller
 
                 $this->login_model->lastLogin($loginInfo);
                 
-                if ($isAdminLogin) {
-                    redirect('user/dashboard');
+                // if ($isAdminLogin) {
+                //     redirect('user/dashboard');
+                // } else {
+                //     redirect('home');                    
+                // }
+                if ($this->session->has_userdata('currentURL')) {
+                    redirect($this->session->userdata('currentURL'), 'refresh'); 
                 } else {
-                    redirect('home');                    
+                    redirect(home);
                 }
             }
             else
             {
                 $this->session->set_flashdata('error', 'Email or password mismatch');
-                
                 $this->index();
             }
         }
@@ -115,7 +117,7 @@ class Login extends CI_Controller
         }
         else
         {
-            redirect('user/dashboard');
+            redirect('user/profile');
         }
     }
 
@@ -133,7 +135,7 @@ class Login extends CI_Controller
         }
         else
         {
-            redirect('user/dashboard');
+            redirect('user/profile');
         }
     }
     

@@ -4,10 +4,7 @@ require APPPATH . '/libraries/BaseController.php';
 
 /**
  * Class : User (UserController)
- * User Class to control all user related operations.
- * @author : Kishor Mali
- * @version : 1.1
- * @since : 15 November 2016
+ * User Class to control all users (members) related operations.
  * 
  * List of functions:
  * userListing()
@@ -34,6 +31,7 @@ class User extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('book_model');
         $this->isLoggedIn();
     }
     
@@ -42,9 +40,9 @@ class User extends BaseController
      */
     public function index()
     {
-        $this->global['pageTitle'] = 'CodeInsect : Dashboard';
+        $this->global['pageTitle'] = 'Account Detail';
         
-        $this->loadViews("back/user/dashboard", $this->global, NULL , NULL);
+        $this->loadViews("back/user/profile", $this->global, NULL , NULL);
     }
     
     /**
@@ -64,13 +62,10 @@ class User extends BaseController
             $this->load->library('pagination');
             
             $count = $this->user_model->userListingCount($searchText);
-
 			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
-            
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            
-            $this->global['pageTitle'] = 'CodeInsect : User Listing';
-            
+
+            $this->global['pageTitle'] = 'Library : User Listing';
             $this->loadViews("back/user/users", $this->global, $data, NULL);
         }
     }
@@ -89,7 +84,7 @@ class User extends BaseController
             $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
             
-            $this->global['pageTitle'] = 'CodeInsect : Add New User';
+            $this->global['pageTitle'] = 'Library : Add New User';
 
             $this->loadViews("back/user/addNew", $this->global, $data, NULL);
         }
@@ -186,7 +181,7 @@ class User extends BaseController
             $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
             
-            $this->global['pageTitle'] = 'CodeInsect : Edit User';
+            $this->global['pageTitle'] = 'Library : Edit User';
             
             $this->loadViews("back/user/editOld", $this->global, $data, NULL);
         }
@@ -285,7 +280,7 @@ class User extends BaseController
      */
     function pageNotFound()
     {
-        $this->global['pageTitle'] = 'CodeInsect : 404 - Page Not Found';
+        $this->global['pageTitle'] = 'Library : 404 - Page Not Found';
         
         $this->loadViews("404", $this->global, NULL, NULL);
     }
@@ -322,7 +317,7 @@ class User extends BaseController
 
             $data['userRecords'] = $this->user_model->loginHistory($userId, $searchText, $fromDate, $toDate, $returns["page"], $returns["segment"]);
             
-            $this->global['pageTitle'] = 'CodeInsect : User Login History';
+            $this->global['pageTitle'] = 'Library : User Login History';
             
             $this->loadViews("back/user/loginHistory", $this->global, $data, NULL);
         }        
@@ -336,7 +331,7 @@ class User extends BaseController
         $data["userInfo"] = $this->user_model->getUserInfoWithRole($this->vendorId);
         $data["active"] = $active;
         
-        $this->global['pageTitle'] = $active == "details" ? 'CodeInsect : My Profile' : 'CodeInsect : Change Password';
+        $this->global['pageTitle'] = $active == "details" ? 'Library : My Profile' : 'Library : Change Password';
         $this->loadViews("back/user/profile", $this->global, $data, NULL);
     }
 
@@ -447,17 +442,138 @@ class User extends BaseController
         return $return;
     }
 
-    public function book($para1 = "")
+    /**
+     * Loads add new book form
+     */
+    function addNewBook()
     {
-        if ($para1 == 'add') {
-
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
         }
-        if ($para1 == 'edit') {
+        else
+        {
+            $this->load->model('book_model');
+            $data['roles'] = $this->book_model->getUserRoles();
+            
+            $this->global['pageTitle'] = 'Library : Add New User';
 
+            $this->loadViews("back/user/addNew", $this->global, $data, NULL);
         }
-        if ($para1 == 'delete') {
+    }
 
+    /**
+     * Edit book
+     */
+    function editBook($bookId = NULL)
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
         }
+        else
+        {
+            if($bookId == null)
+            {
+                redirect('user/bookListing');
+            }
+            
+            $data['bookInfo'] = $this->book_model->getBookInfo($bookId);
+            $this->global['pageTitle'] = 'Library : Edit Book';
+            $this->loadViews("back/book/editBook", $this->global, $data, NULL);
+        }
+    }
+
+    function updateBook()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+            // hidden field
+            $bookId = $this->input->post('bookId');
+            
+            $this->form_validation->set_rules('title','Title','required');
+            $this->form_validation->set_rules('author','Author','required');
+            $this->form_validation->set_rules('description','Description','required');
+            $this->form_validation->set_rules('subject','Subject','required');
+            
+            // check rules
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->editBook($bookId);
+            }
+            else
+            {
+                // clean up fields
+                $title = ucwords(strtolower($this->security->xss_clean($this->input->post('title'))));
+                $author = $this->security->xss_clean($this->input->post('author'));
+                $description = $this->security->xss_clean($this->input->post('description'));
+                $subject = $this->security->xss_clean($this->input->post('subject'));
+                
+                $bookInfo = array();
+                
+                $bookInfo = array('title'=>$title, 'author'=>$author, 'description'=>$description,
+                    'subject'=>$subject, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                
+                $result = $this->book_model->editBook($bookInfo, $bookId);
+                
+                if($result == true)
+                {
+                    $this->session->set_flashdata('success', 'Book updated successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Book updation failed');
+                }
+                
+                redirect('user/bookListing');
+            }
+        }
+    }
+
+    /**
+     * This function is used to delete the user using bookId
+     * @return boolean $result : TRUE / FALSE
+     */
+    function deleteBook()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {
+            $bookId = $this->input->post('bookId');
+            $bookInfo = array('isDeleted'=>1, 'updatedDtm'=>date('Y-m-d H:i:s'));
+            
+            $result = $this->book_model->deleteBook($bookId, $bookInfo);
+            
+            if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+            else { echo(json_encode(array('status'=>FALSE))); }
+        }
+    }
+
+    /**
+     * This function is used to load the book list
+     */
+    function bookListing()
+    {
+        $this->load->helper('text');
+        $searchText = $this->security->xss_clean($this->input->post('searchText'));
+        $data['searchText'] = $searchText;
+        
+        $this->load->library('pagination');
+        
+        $count = $this->book_model->bookListingCount($searchText);
+        $returns = $this->paginationCompress ( "bookListing/", $count, 10 );
+        $data['bookRecords'] = $this->book_model->bookListing($searchText, $returns["page"], $returns["segment"]);
+
+        $this->global['pageTitle'] = 'Library : Book Listing';
+        $this->loadViews("back/book/books", $this->global, $data, NULL);
     }
 }
 

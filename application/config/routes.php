@@ -76,27 +76,16 @@ $route['login/createPasswordUser'] = "login/createPasswordUser";
 $route['login/loginMe'] = 'login/loginMe';
 
 // backend
-$route['user/dashboard'] = 'user';
-$route['user/userListing'] = 'user/userListing';
+$route['user/book/(.*)'] = "user/book/$1";
 $route['user/userListing/(:num)'] = "user/userListing/$1";
-$route['user/addNew'] = "user/addNew";
-$route['user/addNewUser'] = "user/addNewUser";
-$route['user/editOld'] = "user/editOld";
 $route['user/editOld/(:num)'] = "user/editOld/$1";
-$route['user/editUser'] = "user/editUser";
-$route['user/deleteUser'] = "user/deleteUser";
-$route['user/profile'] = "user/profile";
 $route['user/profile/(:any)'] = "user/profile/$1";
-$route['user/profileUpdate'] = "user/profileUpdate";
 $route['user/profileUpdate/(:any)'] = "user/profileUpdate/$1";
-$route['user/loadChangePass'] = "user/loadChangePass";
-$route['user/changePassword'] = "user/changePassword";
 $route['user/changePassword/(:any)'] = "user/changePassword/$1";
-$route['user/pageNotFound'] = "user/pageNotFound";
-$route['user/checkEmailExists'] = "user/checkEmailExists";
-$route['user/login-history'] = "user/loginHistoy";
 $route['user/login-history/(:num)'] = "user/loginHistoy/$1";
 $route['user/login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
+$route['user'] = 'user/profile';
+$route['user/(.*)'] = 'user/$1';
 
 $route['login/forgotPassword'] = "login/forgotPassword";
 $route['login/resetPasswordUser'] = "login/resetPasswordUser";

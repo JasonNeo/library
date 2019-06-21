@@ -73,6 +73,10 @@ h1, h2, h3, h4, h5, h6{
   opacity: .5;
 }
 
+.img-logo {
+  max-width: 150px;
+}
+
 /*LOADER*/
 @-webkit-keyframes enter {
   0% {
@@ -224,8 +228,14 @@ h1, h2, h3, h4, h5, h6{
 
 /* HEADER*/
 .header_content{
-  padding: 55px 0;
+  /* padding: 55px 0; */
 }
+
+/* BODY */
+.body-container{
+  padding-top: 200px;
+}
+
 .home_slider_background{
   position: relative;
 }
@@ -250,7 +260,7 @@ h1, h2, h3, h4, h5, h6{
 } */
 
 .header.scrolled{
-  top: -15px;
+  /* top: -15px; */
 }
 .home{
   min-height: 100px;
