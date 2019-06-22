@@ -584,6 +584,50 @@ class User extends BaseController
     }
 
     /**
+     * This function is used to return book using bookId
+     * @return boolean $result : TRUE / FALSE
+     */
+    function borrowBook($bookId = NULL, $userId)
+    {
+        if($bookId == null || $userId == null)
+        {
+            redirect('user/bookListing');
+        }
+        
+        $result = $this->book_model->borrowBook($bookId, $userId);
+        
+        if ($result > 0) { 
+            if ($this->session->has_userdata('currentURL')) {
+                redirect($this->session->userdata('currentURL'), 'refresh'); 
+            } else {
+                redirect(base_url());
+            }
+        } else { 
+            echo(json_encode(array('status'=>FALSE)));
+        }
+    }
+
+    /**
+     * This function is used to return book using bookId
+     * @return boolean $result : TRUE / FALSE
+     */
+    function returnBook($bookId = NULL)
+    {
+        if($bookId == null)
+        {
+            redirect('user/bookListing');
+        }
+        
+        $result = $this->book_model->returnBook($bookId);
+        
+        if ($result > 0) { 
+            redirect('user/bookListing');
+        } else { 
+            echo(json_encode(array('status'=>FALSE)));
+        }
+    }
+
+    /**
      * This function is used to delete the user using bookId
      * @return boolean $result : TRUE / FALSE
      */
@@ -616,9 +660,10 @@ class User extends BaseController
         
         $this->load->library('pagination');
         
+        $userId = (int) $this->session->userdata ( 'userId' );
         $count = $this->book_model->bookListingCount($searchText);
         $returns = $this->paginationCompress ( "bookListing/", $count, 10 );
-        $data['bookRecords'] = $this->book_model->bookListing($searchText, $returns["page"], $returns["segment"]);
+        $data['bookRecords'] = $this->book_model->bookListing($searchText, $returns["page"], $returns["segment"], $userId);
 
         $this->global['pageTitle'] = 'Library : Book Listing';
         $this->loadViews("back/book/books", $this->global, $data, NULL);

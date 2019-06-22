@@ -49,8 +49,8 @@ class Login extends CI_Controller
     {
         $this->load->library('form_validation');
         
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
+        $this->form_validation->set_rules('login-email', 'Email', 'required|valid_email|max_length[128]|trim');
+        $this->form_validation->set_rules('login-password', 'Password', 'required|max_length[32]');
         
         if($this->form_validation->run() == FALSE)
         {
@@ -58,8 +58,8 @@ class Login extends CI_Controller
         }
         else
         {
-            $email = strtolower($this->security->xss_clean($this->input->post('email')));
-            $password = $this->input->post('password');
+            $email = strtolower($this->security->xss_clean($this->input->post('login-email')));
+            $password = $this->input->post('login-password');
             
             $result = $this->login_model->loginMe($email, $password);
             
@@ -92,7 +92,7 @@ class Login extends CI_Controller
                 if ($this->session->has_userdata('currentURL')) {
                     redirect($this->session->userdata('currentURL'), 'refresh'); 
                 } else {
-                    redirect(home);
+                    redirect(base_url());
                 }
             }
             else

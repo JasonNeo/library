@@ -7,23 +7,20 @@
     <meta name="description" content="Unicat project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- third party -->
+    <!-- Bootstrap 4 -->
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dist/css/bootstrap4/bootstrap.min.css">
-    <link href="<?= base_url(); ?>plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>plugins/OwlCarousel2-2.2.1/animate.css">
+    <!-- FontAwesome 4.3.0 -->
+    <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dist/css/main_styles.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dist/css/responsive.css">
 
     <!-- custom -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dist/css/elvin.css"> -->
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dist/css/my_styles.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/dist/css/modal.css">
 
 </head>
 <body>
@@ -59,6 +56,15 @@
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
+									<?php
+										$error = $this->session->flashdata('error');
+										if($error):
+									?>
+											<div class="alert alert-danger alert-dismissable">
+												<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+												<?php echo $this->session->flashdata('error'); ?>
+											</div>
+									<?php endif; ?>
 									<li><a href="<?= base_url(); ?>about">About us</a></li>
 									<li><a href="<?= base_url(); ?>book/all">Catalogue</a></li>
 									<?php
@@ -66,8 +72,8 @@
 										if (!$isLoggedIn):
 									?>
 									<li>
-										<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalCenter" data-type="loginMe">Login</button>
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter" data-type="register">Register</button>
+										<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#loginModal" data-type="loginMe">Login</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" data-type="register">Register</button>
 									</li>
 									<?php
 										// logged in

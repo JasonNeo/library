@@ -1,21 +1,20 @@
 <div class="container result-container">
-    <div class="row mb-5">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form action="" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
-                <div class="d-flex flex-row align-items-center justify-content-start">
-                    <input type="search" class="home_search_input" placeholder="Search All" required="required">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </div>
-            </form>
+    <form method="post" action="<?= base_url() ?>home/book/search">
+        <div class="input-group mt-5 mb-5">
+            <input type="text" class="form-control" placeholder="Search catalogue" name="searchText">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="row mb-3">
         <div class="col-md-3">
             <h2 class="h6"><span class="border-bottom">Refine your results</span></h2>
         </div>
         <div class="col-md-9">
-            <h2 class="h6 pull-left"><span class="border-bottom">3 catalogue results</span></h2>
+            <h2 class="h6 pull-left"><span class="border-bottom"><?= $count; ?> catalogue results</span></h2>
         </div>
     </div>
     <div class="row">

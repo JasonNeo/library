@@ -63,6 +63,7 @@ $route['about'] = 'home/about';
 $route['catalogue'] = 'home/catalogue';
 $route['harvard'] = 'home/harvard';
 $route['result'] = 'home/result';
+$route['home/(.*)'] = 'home/$1';
 
 $route['book'] = "home/book";
 $route['book/(.*)'] = "home/book/$1";

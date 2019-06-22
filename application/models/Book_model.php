@@ -36,11 +36,17 @@ class Book_model extends CI_Model
      * @param number $segment : This is pagination limit
      * @return array $result : This is result
      */
-    function bookListing($searchText = '', $page, $segment)
+    function bookListing($searchText = '', $page, $segment, $userId = 1)
     {
         $this->db->select('*');
         $this->db->from('tbl_books as BaseTbl');
         $this->db->join('tbl_subjects as Subject', 'Subject.subjectId = BaseTbl.subjectId','left');
+
+        
+        // if current user is not admin
+        if($userId != 1) {
+            $this->db->where('BaseTbl.userId', $userId);
+        }
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.title  LIKE '%".$searchText."%'
                             OR  BaseTbl.author  LIKE '%".$searchText."%'
@@ -132,12 +138,29 @@ class Book_model extends CI_Model
     }
 
     /**
+     * This function is used to borrow book
+     * @param number $bookId : This is book id
+     * @return boolean $result : TRUE / FALSE
+     */
+    function borrowBook($bookId, $userId)
+    {
+        $this->db->set('userId', $userId);
+        $this->db->set('availability', 0);
+        $this->db->where('bookId', $bookId);
+        $this->db->update('tbl_books');
+        
+        return TRUE;
+    }
+
+    /**
      * This function is used to return book
      * @param number $bookId : This is book id
      * @return boolean $result : TRUE / FALSE
      */
     function returnBook($bookId)
     {
+        // set userId to admin
+        $this->db->set('userId', 1);
         $this->db->set('availability', 1);
         $this->db->where('bookId', $bookId);
         $this->db->update('tbl_books');

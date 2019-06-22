@@ -233,7 +233,7 @@ h1, h2, h3, h4, h5, h6{
 
 /* BODY */
 .body-container{
-  padding-top: 200px;
+  padding-top: 110px;
 }
 
 .home_slider_background{
@@ -272,9 +272,9 @@ h1, h2, h3, h4, h5, h6{
   left: 0;
   bottom: 0;
 }
-.home_slider_container{
-  min-height: 100vh;
-  background-image: url("../my_images/hero_bg.jpg");
+.banner{
+  min-height: 60vh;
+  background-image: url("../../images/hero.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

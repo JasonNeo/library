@@ -1,3 +1,12 @@
+<?php
+$subjectName = '';
+foreach($subjects as $subject) {
+    if($subject['subjectId'] == $book['subjectId']) {
+        $subjectName = $subject['subject'];
+    }
+}
+?>
+
 <div class="container mt-5">
     <?php if($this->session->flashdata('msg')): ?>
         <div class="alert alert-success" role="alert">
@@ -15,7 +24,7 @@
                         <dt>Author</dt>
                         <dd><?= $book['author'] ?></dd>
                         <dt>Subject</dt>
-                        <dd><?= $book['subject'] ?></dd>
+                        <dd><?= $subjectName ?></dd>
                         <dt>Description</dt>
                         <dd><?= $book['description'] ?></dd>
                     </div>
@@ -31,7 +40,7 @@
                 <?php
                         else:
                 ?>
-                            <form action="<?= base_url(); ?>user/book/borrow/<?= $book['bookId'] ?>" method="post">
+                            <form action="<?= base_url(); ?>user/borrowBook/<?= $book['bookId'] ?>/<?= $userId; ?>" method="post">
                                 <button type="submit" class="btn btn-default">Borrow</button>
                             </form>
                 <?php

@@ -1,19 +1,25 @@
+<?php
+    $isNormalUser = $role == 4 ? TRUE : FALSE;
+?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-book"></i> Book Management
-        <small>Add, Edit, Delete</small>
+        <i class="fa fa-book"></i> <?= $isNormalUser ? "My Books" : "Book Management" ?>
+        <small><?= $isNormalUser ? "" : "Add, Edit, Delete" ?></small>
       </h1>
     </section>
     <section class="content">
-        <div class="row">
-            <div class="col-xs-12 text-right">
-                <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>user/newBook"><i class="fa fa-plus"></i> Add New</a>
+        <?php if(!$isNormalUser): ?>
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <div class="form-group">
+                        <a class="btn btn-primary" href="<?php echo base_url(); ?>user/newBook"><i class="fa fa-plus"></i> Add New</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
         <div class="row">
             <div class="col-xs-12">
               <div class="box">
@@ -53,8 +59,12 @@
                         <td><?php echo word_limiter($record->subject, 6) ?></td>
                         <td><?php echo $record->availability ?></td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'user/editBook/'.$record->bookId; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-sm btn-danger" href="#" id="deleteBook" data-bookid="<?php echo $record->bookId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                            <?php if($isNormalUser): ?>
+                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'user/returnBook/'.$record->bookId; ?>" title="Return"><i class="fa fa-refresh"></i></a>
+                            <?php else: ?>
+                                <a class="btn btn-sm btn-info" href="<?php echo base_url().'user/editBook/'.$record->bookId; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-danger" href="#" id="deleteBook" data-bookid="<?php echo $record->bookId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php
