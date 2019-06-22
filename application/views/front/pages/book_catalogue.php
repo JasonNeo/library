@@ -5,7 +5,7 @@
             <form action="" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
                 <div class="d-flex flex-row align-items-center justify-content-start">
                     <input type="search" class="home_search_input" placeholder="Search All" required="required">
-                    <button type="submit"><img src="./my_images/icons/bold_search_64.png"></button>
+                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </form>
         </div>
@@ -16,11 +16,6 @@
         </div>
         <div class="col-md-9">
             <h2 class="h6 pull-left"><span class="border-bottom">3 catalogue results</span></h2>
-            <ul class="pull-right">
-                <li class="d-inline-block ml-1"><a href="#" class="badge badge-pill badge-primary badge-tag"><i class="fas fa-times"></i> biology</a></li>
-                <li class="d-inline-block ml-1"><a href="#" class="badge badge-pill badge-primary badge-tag"><i class="fas fa-times"></i> book</a></li>
-                <li class="d-inline-block ml-1"><a href="#" class="badge badge-pill badge-primary badge-tag"><i class="fas fa-times"></i> wiley</a></li>
-            </ul>
         </div>
     </div>
     <div class="row">
@@ -296,13 +291,12 @@
                                     <dd class="ml-3">
                                         <?= $book['description'] ?>
                                         <br/><br/>
-                                        <strong>Subjects</strong>: 
+                                        <strong>Subject</strong>:
                                         <?php
-                                            $subjects = explode(",", $book['subject']);
                                             foreach($subjects as $subject):
-                                        ?>
-                                        <a href=""><?= $subject ?></a>;
-                                        <?php
+                                                if($subject['subjectId'] == $book['subjectId']):
+                                                    echo $subject['subject'];
+                                                endif;
                                             endforeach;
                                         ?>
                                     </dd>
@@ -315,25 +309,6 @@
                     ?>
                 </ul>
             </main>
-            <nav aria-label="Page navigation example" class="mt-5 mb-5">
-                <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    <a class="page-link" href="./result.html" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="./result.html">1</a></li>
-                <li class="page-item"><a class="page-link" href="./result.html">2</a></li>
-                <li class="page-item"><a class="page-link" href="./result.html">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="./result.html" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                    </a>
-                </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>

@@ -13,13 +13,14 @@ class Book_model extends CI_Model
      */
     function bookListingCount($searchText = '')
     {
-        $this->db->select('BaseTbl.title, BaseTbl.author, BaseTbl.description, BaseTbl.subject, BaseTbl.isDeleted ');
+        $this->db->select('BaseTbl.title, BaseTbl.author, BaseTbl.description, BaseTbl.subjectId, BaseTbl.isDeleted, Subject.subject');
         $this->db->from('tbl_books as BaseTbl');
+        $this->db->join('tbl_subjects as Subject', 'Subject.subjectId = BaseTbl.subjectId','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.title  LIKE '%".$searchText."%'
                             OR  BaseTbl.author  LIKE '%".$searchText."%'
                             OR  BaseTbl.description  LIKE '%".$searchText."%'
-                            OR  BaseTbl.subject  LIKE '%".$searchText."%')";
+                            OR  Subject.subject  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
@@ -39,11 +40,12 @@ class Book_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_books as BaseTbl');
+        $this->db->join('tbl_subjects as Subject', 'Subject.subjectId = BaseTbl.subjectId','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.title  LIKE '%".$searchText."%'
                             OR  BaseTbl.author  LIKE '%".$searchText."%'
                             OR  BaseTbl.description  LIKE '%".$searchText."%'
-                            OR  BaseTbl.subject  LIKE '%".$searchText."%')";
+                            OR  Subject.subject  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->where('BaseTbl.isDeleted', 0);
@@ -56,6 +58,19 @@ class Book_model extends CI_Model
     }
 
     /**
+     * This function is used to get the subjects information
+     * @return array $result : This is result of the query
+     */
+    function getSubjects()
+    {
+        $this->db->select('subjectId, subject');
+        $this->db->from('tbl_subjects');
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+
+    /**
      * This function is used to add new book to system
      * @return number $insert_id : This is last inserted id
      */
@@ -63,9 +78,7 @@ class Book_model extends CI_Model
     {
         $this->db->trans_start();
         $this->db->insert('tbl_books', $bookInfo);
-        
         $insert_id = $this->db->insert_id();
-        
         $this->db->trans_complete();
         
         return $insert_id;
@@ -81,6 +94,7 @@ class Book_model extends CI_Model
         // $this->db->select('bookId, name, email, mobile, roleId');
         $this->db->select('*');
         $this->db->from('tbl_books');
+        $this->db->join('tbl_subjects', 'tbl_subjects.subjectId = tbl_books.subjectId','left');
         $this->db->where('isDeleted', 0);
         $this->db->where('bookId', $bookId);
         $query = $this->db->get();

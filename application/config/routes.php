@@ -66,16 +66,7 @@ $route['result'] = 'home/result';
 
 $route['book'] = "home/book";
 $route['book/(.*)'] = "home/book/$1";
-$route['register'] = "login/createPasswordUser";
 
-// frontend & backend
-// $route['user/logout'] = 'user/logout';
-$route['login/createPasswordUser'] = "login/createPasswordUser";
-
-// frontend
-$route['login/loginMe'] = 'login/loginMe';
-
-// backend
 $route['user/book/(.*)'] = "user/book/$1";
 $route['user/userListing/(:num)'] = "user/userListing/$1";
 $route['user/editOld/(:num)'] = "user/editOld/$1";
@@ -85,13 +76,12 @@ $route['user/changePassword/(:any)'] = "user/changePassword/$1";
 $route['user/login-history/(:num)'] = "user/loginHistoy/$1";
 $route['user/login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
 $route['user'] = 'user/profile';
+$route['user/register'] = 'user/addNew';
 $route['user/(.*)'] = 'user/$1';
 
-$route['login/forgotPassword'] = "login/forgotPassword";
-$route['login/resetPasswordUser'] = "login/resetPasswordUser";
-$route['login/resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
 $route['login/resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
 $route['login/resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
+$route['login/(.*)'] = 'login/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

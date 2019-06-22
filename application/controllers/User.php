@@ -445,7 +445,7 @@ class User extends BaseController
     /**
      * Loads add new book form
      */
-    function addNewBook()
+    function newBook()
     {
         if($this->isAdmin() == TRUE)
         {
@@ -454,11 +454,58 @@ class User extends BaseController
         else
         {
             $this->load->model('book_model');
-            $data['roles'] = $this->book_model->getUserRoles();
-            
-            $this->global['pageTitle'] = 'Library : Add New User';
+            $data['subjects'] = $this->book_model->getSubjects();
+            $this->global['pageTitle'] = 'Library : Add New Book';
+            $this->loadViews("back/book/addBook", $this->global, $data, NULL);
+        }
+    }
 
-            $this->loadViews("back/user/addNew", $this->global, $data, NULL);
+        /**
+     * This function is used to add new book to the system
+     */
+    function addNewBook()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('title','Title','trim|required|max_length[128]');
+            $this->form_validation->set_rules('author','Author','trim|required|max_length[128]');
+            $this->form_validation->set_rules('description','Description','trim|required|max_length[128]');
+            $this->form_validation->set_rules('subject','Subject','trim|required|max_length[128]');
+            
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->newBook();
+            }
+            else
+            {
+                $title = $this->security->xss_clean($this->input->post('title'));
+                $author = $this->security->xss_clean($this->input->post('author'));
+                $description = $this->security->xss_clean($this->input->post('description'));
+                $subjectId = $this->input->post('subject');
+                
+                $bookInfo = array('title'=> $title, 'author'=>$author, 'subjectId'=>$subjectId,
+                                    'description'=>$description, 'availability'=>1, 'createdDtm'=>date('Y-m-d H:i:s'));
+                
+                $this->load->model('book_model');
+                $result = $this->book_model->addNewBook($bookInfo);
+                
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'New Book created successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Book creation failed');
+                }
+                
+                redirect('user/bookListing');
+            }
         }
     }
 
@@ -479,6 +526,7 @@ class User extends BaseController
             }
             
             $data['bookInfo'] = $this->book_model->getBookInfo($bookId);
+            $data['subjects'] = $this->book_model->getSubjects();
             $this->global['pageTitle'] = 'Library : Edit Book';
             $this->loadViews("back/book/editBook", $this->global, $data, NULL);
         }
@@ -499,7 +547,7 @@ class User extends BaseController
             $this->form_validation->set_rules('title','Title','required');
             $this->form_validation->set_rules('author','Author','required');
             $this->form_validation->set_rules('description','Description','required');
-            $this->form_validation->set_rules('subject','Subject','required');
+            $this->form_validation->set_rules('subjectId','Subject','required');
             
             // check rules
             if($this->form_validation->run() == FALSE)
@@ -512,12 +560,12 @@ class User extends BaseController
                 $title = ucwords(strtolower($this->security->xss_clean($this->input->post('title'))));
                 $author = $this->security->xss_clean($this->input->post('author'));
                 $description = $this->security->xss_clean($this->input->post('description'));
-                $subject = $this->security->xss_clean($this->input->post('subject'));
+                $subjectId = $this->input->post('subjectId');
                 
                 $bookInfo = array();
                 
                 $bookInfo = array('title'=>$title, 'author'=>$author, 'description'=>$description,
-                    'subject'=>$subject, 'updatedDtm'=>date('Y-m-d H:i:s'));
+                    'subjectId'=>$subjectId, 'updatedDtm'=>date('Y-m-d H:i:s'));
                 
                 $result = $this->book_model->editBook($bookInfo, $bookId);
                 

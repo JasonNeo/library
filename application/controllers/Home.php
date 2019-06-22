@@ -71,7 +71,8 @@ class Home extends BaseController {
 		
 		if ($type == 'all') {
 			$page_data['page_name'] = "book_catalogue";
-			$page_data['books'] = $this->db->get('tbl_books')->result_array();	
+			$page_data['books'] = $this->db->get('tbl_books')->result_array();
+			$page_data['subjects'] = $this->db->get('tbl_subjects')->result_array();	
 		}
 
 		$this->load->view('front/index', $page_data);

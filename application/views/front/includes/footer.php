@@ -49,6 +49,11 @@
 
     <script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
     <script>
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     // document ready
     $(document).ready(function() {
         $('#modalCenter').on('show.bs.modal', function (event) {
@@ -57,9 +62,9 @@
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this);
-            modal.find('#modal_title').text(type);
-            modal.find('#submit_btn').text(type);
-            $('#my_form').attr('action', '<?= base_url(); ?>login/' + type);
+            modal.find('#modal_title').text(capitalizeFirstLetter(type));
+            modal.find('#submit_btn').text(capitalizeFirstLetter(type));
+            $('#my_form').attr('action', '<?= base_url(); ?>user/' + type);
         });
     });
     </script>
