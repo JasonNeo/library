@@ -145,9 +145,7 @@ class Login extends CI_Controller
     function resetPasswordUser()
     {
         $status = '';
-        
         $this->load->library('form_validation');
-        
         $this->form_validation->set_rules('login_email','Email','trim|required|valid_email');
                 
         if($this->form_validation->run() == FALSE)

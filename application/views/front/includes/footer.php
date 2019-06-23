@@ -35,10 +35,10 @@
                 <div class="container">
                     <form id="login-form" action="<?= base_url(); ?>login/loginMe" method="post" role="form">
                         <div class="form-group">
-                            <input type="text" name="login-email" id="login-email" tabindex="1" class="form-control" placeholder="Email" value="">
+                            <input type="text" name="login-email" id="login-email" tabindex="1" class="form-control" required placeholder="Email" value="">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="login-password" id="login-password" tabindex="2" class="form-control" placeholder="Password">
+                            <input type="password" name="login-password" id="login-password" tabindex="2" class="form-control" required placeholder="Password">
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="text-center">
-                                        <a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                        <a href="<?= base_url(); ?>login/forgotPassword" tabindex="5" class="forgot-password">Forgot Password?</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,19 +75,19 @@
                 <div class="container">
                     <form id="register-form" action="<?= base_url(); ?>home/register" method="post" role="form">
                         <div class="form-group">
-                            <input type="text" name="register-fname" id="register-fname" tabindex="1" class="form-control" placeholder="Full Name" value="">
+                            <input type="text" name="register-fname" id="register-fname" tabindex="1" class="form-control" required placeholder="Full Name" value="">
                         </div>
                         <div class="form-group">
-                            <input type="tel" name="register-mobile" id="register-mobile" tabindex="1" class="form-control" placeholder="Mobile Number" value="">
+                            <input type="tel" name="register-mobile" id="register-mobile" tabindex="1" class="form-control" required placeholder="Mobile Number" value="">
                         </div>
                         <div class="form-group">
-                            <input type="email" name="register-email" id="register-email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                            <input type="email" name="register-email" id="register-email" tabindex="1" class="form-control" required placeholder="Email Address" value="">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="register-password" id="register-password" tabindex="2" class="form-control" placeholder="Password">
+                            <input type="password" name="register-password" id="register-password" tabindex="2" class="form-control" required placeholder="Password">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="register-cpassword" id="register-cpassword" tabindex="2" class="form-control" placeholder="Confirm Password">
+                            <input type="password" name="register-cpassword" id="register-cpassword" tabindex="2" class="form-control" required placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
                             <div class="row">
